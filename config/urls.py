@@ -28,7 +28,7 @@ from rest_framework_swagger.views import get_swagger_view
 API_TITLE = 'DRF-PyOTP APIs'
 
 urlpatterns = [
-    url(r'^swagger/$', get_swagger_view(title=API_TITLE)),
+    url(r'^pyotp-swagger/$', get_swagger_view(title=API_TITLE)),
 
     # url(r'^admin/', admin.site.urls),
 
