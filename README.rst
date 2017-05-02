@@ -43,7 +43,7 @@ Usage
 
 - Add Urls in your url file::
 
-   url(r'', rest_pyotp.urls, name='rest-pyotp-urls')
+   url(r'', include('rest_pyotp.routers', namespace='rest-pyotp-urls')),
 
 
 APIs
