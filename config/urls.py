@@ -19,21 +19,18 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.contrib import admin
 
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 
 
-API_TITLE = 'drf-pyotp API'
+API_TITLE = 'DRF-PyOTP APIs'
 
 urlpatterns = [
     url(r'^swagger/$', get_swagger_view(title=API_TITLE)),
 
-    url(r'^admin/', admin.site.urls),
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^docs/', include_docs_urls(title=API_TITLE, description='')),
+    # url(r'^admin/', admin.site.urls),
 
     # pyotp routers
     url(r'', include('app.routers', namespace='drf-pyotp')),
@@ -43,8 +40,6 @@ urlpatterns = [
 if settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]
