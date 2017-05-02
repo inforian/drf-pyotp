@@ -27,6 +27,7 @@ class OTPMixin(object):
     """
     Apply this mixin to Perform Various operations of PyOTP.
     """
+    provision_uri = False
 
     def _get_random_base32_string(self):
         """Generate Random Base32 string
@@ -51,15 +52,16 @@ class OTPMixin(object):
         }
 
         # is provision settings is True only then save data into db
-        if settings.PROVISION_URI is True:
+        if self.provision_uri is True:
             fields.update(**data)
 
         return PyOTP.objects.create(**fields)
 
-    def _generate_hotp(self, count, data={}):
+    def _generate_hotp(self, count, provision_uri=False, data={}):
         """Generates counter-based OTPs
 
         """
+        self.provision_uri = provision_uri
         base32string = self._get_random_base32_string()
         hotp = pyotp.HOTP(base32string)
         otp = hotp.at(count)
@@ -68,10 +70,11 @@ class OTPMixin(object):
         obj = self._insert_into_db(otp, secret=base32string, count=count, data=data)
         return self._create_response(otp, obj, hotp, data)
 
-    def _generate_totp(self, interval, data={}):
+    def _generate_totp(self, interval, provision_uri=False, data={}):
         """Generates time-based OTPs
 
         """
+        self.provision_uri = provision_uri
         base32string = self._get_random_base32_string()
         totp = pyotp.TOTP(base32string, interval=interval)
         otp = totp.now()
@@ -94,10 +97,10 @@ class OTPMixin(object):
         }
 
         # Generate provision uri if settings is True
-        if settings.PROVISION_URI is True:
+        if self.provision_uri is True:
             provisioning_uri = otp_type_obj.provisioning_uri(**data)
-            response.update({
+            response = {
                 'provisioning_uri': provisioning_uri
-            })
+            }
 
         return response

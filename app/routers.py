@@ -29,15 +29,36 @@ verify_otp = views.PyotpViewset.as_view({
     'post': 'verify_otp',
 })
 
-generate_otp = views.PyotpViewset.as_view({
-    'post': 'generate_otp',
+generate_hotp = views.PyotpViewset.as_view({
+    'post': 'generate_hotp',
+})
+
+generate_totp = views.PyotpViewset.as_view({
+    'post': 'generate_totp',
+})
+
+generate_hotp_provision_uri = views.PyotpViewset.as_view({
+    'post': 'generate_hotp_provision_uri',
+})
+
+generate_totp_provision_uri = views.PyotpViewset.as_view({
+    'post': 'generate_totp_provision_uri',
 })
 
 urlpatterns = [
-    url(r'^generate-otp/(?P<otp_type>{otp_type})/$'.format(otp_type=OTP_TYPE_REGEX),
-        generate_otp,
-        name='generate-otp'),
-    url(r'^verify-otp/(?P<otp_type>{otp_type})/(?P<uuid>{uuid})/$'.format(otp_type=OTP_TYPE_REGEX, uuid=UUID_REGEX),
+    url(r'^generate-otp/hotp/$',
+        generate_hotp,
+        name='generate-hotp'),
+    url(r'^generate-otp/totp/$',
+        generate_totp,
+        name='generate-totp'),
+    url(r'^generate-otp/hotp/provision-uri/$',
+        generate_hotp_provision_uri,
+        name='generate-totp-provision-uri'),
+    url(r'^generate-otp/totp/provision-uri/$',
+        generate_totp_provision_uri,
+        name='generate-totp-provision-uri'),
+    url(r'^verify-otp/(?P<otp_type>(hotp|totp))/(?P<uuid>{uuid})/$'.format(otp_type=OTP_TYPE_REGEX, uuid=UUID_REGEX),
         verify_otp,
         name='verify-otp'),
 ]
