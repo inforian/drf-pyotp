@@ -31,9 +31,8 @@ Usage
 
 APIs
 ----
-- I have used swagger-spec for documenting APIs. You can find out APIs swagger docs at::
 
-   http://{your-base-path}/pyotp-swagger/
+- I have used swagger-spec for documenting APIs. You can find out APIs swagger docs `here`_
 
 Contribution
 ------------
@@ -48,3 +47,4 @@ Indices and tables
 * :ref:`search`
 
 .. _PyOTP: https://github.com/pyotp/pyotp
+.. _here: https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
