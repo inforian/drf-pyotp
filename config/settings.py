@@ -320,3 +320,7 @@ REST_FRAMEWORK = {
 }
 # ######### END DJANGO REST FRAMEWORK CONFIGURATION
 
+try:
+    from .local import *
+except Exception as e:
+    print (e)
