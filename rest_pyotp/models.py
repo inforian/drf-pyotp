@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-- app.models
+- rest_pyotp.models
 ~~~~~~~~~~~~~~
 
 - This file holds the necessary models for pyotp service

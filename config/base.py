@@ -160,6 +160,11 @@ STATICFILES_FINDERS = (
 ALLOWED_HOSTS = []
 # ######### END SITE CONFIGURATION
 
+# ######### SECRET CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+# Note: This key should only be used for development and testing.
+SECRET_KEY = get_env_setting('SECRET_KEY')
+# ######### END SECRET CONFIGURATION
 
 # ######### FIXTURE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
@@ -238,7 +243,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'app',
+    'rest_pyotp',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -315,4 +320,3 @@ REST_FRAMEWORK = {
 }
 # ######### END DJANGO REST FRAMEWORK CONFIGURATION
 
-PROVISION_URI = False

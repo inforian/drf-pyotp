@@ -2,29 +2,27 @@
 # -*- coding: utf-8 -*-
 
 """
-- app.views
+- rest_pyotp.views
 ~~~~~~~~~~~
 
-- This file contains API's for pyotp
+- This file contains API's for rest_pyotp
 """
 
 # future
 from __future__ import unicode_literals
 
 # 3rd party
-import pyotp
 
 # rest-framework
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 # Django
-from django.conf import settings
 
 # local
 
 # own app
-from app import serializers, models
+from rest_pyotp import serializers, models
 
 
 class PyotpViewset(viewsets.GenericViewSet):
@@ -34,43 +32,43 @@ class PyotpViewset(viewsets.GenericViewSet):
     queryset = models.PyOTP.objects.all()
     lookup_field = 'uuid'
     otp_type = None
+    serializer_class = serializers.NoneSerializer  # Default serializer is None
 
-    def _get_serializer_from_otp_type(self):
-        """Select
-
-        :return:
+    def generate_hotp(self, request):
         """
-
-    def get_serializer_class(self):
-        """Here we will decide which serializer will be used.
-
-        :return: serializer class
         """
-        otp_type = self.kwargs.get('otp_type')
-        if settings.PROVISION_URI is True:
-            if otp_type == 'hotp':
-                return serializers.HOTPProvisionUriSerializer
-            elif otp_type == 'totp':
-                return serializers.TOTPProvisionUriSerializer
-        else:
-            if otp_type == 'hotp':
-                return serializers.HotpSerializer
-            elif otp_type == 'totp':
-                return serializers.TotpSerializer
-
-    def generate_otp(self, request, otp_type):
-        """
-
-        :param request: Django request
-        :param otp_type: otp_type  [hotp/totp]
-        :return: otp uuid
-        """
-        self.otp_type = otp_type
-        serializer =self.get_serializer(data=request.data)
+        serializer = serializers.HotpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         response = serializer.save()
 
-        return Response(response, status=status.HTTP_200_OK)
+        return Response(response, status=status.HTTP_201_CREATED)
+
+    def generate_totp(self, request):
+        """
+        """
+        serializer = serializers.TotpSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = serializer.save()
+
+        return Response(response, status=status.HTTP_201_CREATED)
+
+    def generate_hotp_provision_uri(self, request):
+        """
+        """
+        serializer = serializers.HOTPProvisionUriSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = serializer.save()
+
+        return Response(response, status=status.HTTP_201_CREATED)
+
+    def generate_totp_provision_uri(self, request):
+        """
+        """
+        serializer = serializers.TOTPProvisionUriSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        response = serializer.save()
+
+        return Response(response, status=status.HTTP_201_CREATED)
 
     def verify_otp(self, request, otp_type, uuid):
         """

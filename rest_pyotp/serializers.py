@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-- app.serializer
+- rest_pyotp.serializer
 ~~~~~~~~~~~~~~
 
 - This file contains pyotp app serializers
@@ -22,7 +22,11 @@ from rest_framework import serializers
 # local
 
 # own app
-from app import mixins
+from rest_pyotp import mixins
+
+
+class NoneSerializer(serializers.Serializer):
+    pass
 
 
 class TotpSerializer(mixins.OTPMixin, serializers.Serializer):
@@ -38,7 +42,7 @@ class TotpSerializer(mixins.OTPMixin, serializers.Serializer):
         :return: pyotp object
         """
         interval = validated_data.pop('time')
-        return self._generate_totp(interval, validated_data)
+        return self._generate_totp(interval, data=validated_data)
 
 
 class HotpSerializer(mixins.OTPMixin, serializers.Serializer):
@@ -54,7 +58,7 @@ class HotpSerializer(mixins.OTPMixin, serializers.Serializer):
         :return: pyotp object
         """
         count = validated_data.pop('count')
-        return self._generate_hotp(count, validated_data)
+        return self._generate_hotp(count, data=validated_data)
 
 
 class ProvisionUriSerializer(serializers.Serializer):
@@ -69,7 +73,15 @@ class TOTPProvisionUriSerializer(TotpSerializer, ProvisionUriSerializer):
     """Serializer for provisioning serializer + TOTP.
 
     """
-    pass
+
+    def create(self, validated_data):
+        """
+
+        :param validated_data: valid data
+        :return: pyotp object
+        """
+        count = validated_data.pop('time')
+        return self._generate_hotp(count, provision_uri=True, data=validated_data)
 
 
 class HOTPProvisionUriSerializer(HotpSerializer, ProvisionUriSerializer):
@@ -78,12 +90,21 @@ class HOTPProvisionUriSerializer(HotpSerializer, ProvisionUriSerializer):
     """
     initial_count = serializers.CharField(default=0, help_text="starting counter value, defaults to 0")
 
+    def create(self, validated_data):
+        """
+
+        :param validated_data: valid data
+        :return: pyotp object
+        """
+        count = validated_data.pop('count')
+        return self._generate_hotp(count, provision_uri=True, data=validated_data)
+
 
 class VerifyOtpSerilaizer(serializers.Serializer):
     """Serializer used to verify OTP
 
     """
-    otp = serializers.IntegerField(required=True)
+    otp = serializers.CharField(required=True)
 
     def verify_otp(self, otp, obj, otp_type):
         """

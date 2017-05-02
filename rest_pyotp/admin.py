@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-- app.admin
+- rest_pyotp.admin
 ~~~~~~~~~~~~~~
 
 - This file contains admin models of pyotp app
@@ -19,7 +19,7 @@ from django.contrib import admin
 # local
 
 # own app
-from app import models
+from rest_pyotp import models
 
 
 class PyOTPAdmin(admin.ModelAdmin):
