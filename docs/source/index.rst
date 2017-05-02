@@ -9,7 +9,7 @@ Installation
 ------------
 ::
 
-    pip install rest_pyotp
+    pip install drf-pyotp
 
 Usage
 -----
