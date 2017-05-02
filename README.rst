@@ -13,20 +13,17 @@ Installation
 
 Usage
 -----
+- Add `drf-pyotp` app in your installed apps
+- Add Urls in your url file : `url(r'', drf-pyotp.urls, name='drf-pyotp-urls'),`
+- Run migrations using `python manage.py migrate`
 
-- **Genertae TOTP :**
-   - API : http://{upstream_url}/generate-otp/totp/
-   - Method : POST
-   - Body : { "time":60 }
-   - Response :
+APIs
+----
+- I have used swagger-spec for documenting APIs. You can find out APIs swagger docs at `http://{your-base-path}/pyotp-swagger/`
 
-{
-  "otp": "839750",
-  "otp_uuid": "3289eee9-fb10-46dc-bf8c-e0d06eccef72"
-}
-
-
-Status code : 200
+Contribution
+------------
+- If anyone wish to contribute in improving this library then he is most welcome, due credit will be given to every individual.
 
 
 
