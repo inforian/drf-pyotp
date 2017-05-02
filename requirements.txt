@@ -19,7 +19,6 @@ openapi-codec==1.3.1
 packaging==16.8
 pexpect==4.2.1
 pickleshare==0.7.4
-pkg-resources==0.0.0
 prompt-toolkit==1.0.14
 psycopg2==2.7.1
 ptyprocess==0.5.1
