@@ -38,6 +38,9 @@ Contribution
 ------------
 - If anyone wish to contribute in improving this library then he is most welcome, due credit will be given to every individual.
 
+Swagger Specs
+-------------
+ https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
 
 Indices and tables
 ==================
