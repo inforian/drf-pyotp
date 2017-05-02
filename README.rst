@@ -9,23 +9,35 @@ Installation
 ------------
 ::
 
-    pip install {install_pkg_name}
+    pip install rest_pyotp
 
 Usage
 -----
-- Add `drf-pyotp` app in your installed apps
-- Add Urls in your url file : `url(r'', drf-pyotp.urls, name='drf-pyotp-urls'),`
-- Run migrations using `python manage.py migrate`
+- Add `rest_pyotp` app in your installed apps::
+
+   INSTALLED_APPS = (
+        ...
+        'rest_pyotp',
+    )
+
+- Run migrations using::
+
+   python manage.py migrate
+
+- Add Urls in your url file::
+
+   url(r'', rest_pyotp.urls, name='rest-pyotp-urls')
+
 
 APIs
 ----
-- I have used swagger-spec for documenting APIs. You can find out APIs swagger docs at `http://{your-base-path}/pyotp-swagger/`
+- I have used swagger-spec for documenting APIs. You can find out APIs swagger docs at::
+
+   http://{your-base-path}/pyotp-swagger/
 
 Contribution
 ------------
 - If anyone wish to contribute in improving this library then he is most welcome, due credit will be given to every individual.
-
-
 
 
 .. _PyOTP: https://github.com/pyotp/pyotp

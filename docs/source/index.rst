@@ -9,15 +9,15 @@ Installation
 ------------
 ::
 
-    pip install {install_pkg_name}
+    pip install rest_pyotp
 
 Usage
 -----
-- Add `drf-pyotp` app in your installed apps::
+- Add `rest_pyotp` app in your installed apps::
 
    INSTALLED_APPS = (
         ...
-        'drf_pyotp'
+        'rest_pyotp',
     )
 
 - Run migrations using::
@@ -26,7 +26,7 @@ Usage
 
 - Add Urls in your url file::
 
-   url(r'', drf-pyotp.urls, name='drf-pyotp-urls')
+   url(r'', rest_pyotp.urls, name='rest-pyotp-urls')
 
 
 APIs
