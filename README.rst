@@ -1,6 +1,14 @@
 PyOTP extension for DRF (Django Rest Framework) !
 =================================================
 
+.. image:: https://readthedocs.org/projects/drf-pyotp/badge/?version=latest
+    :target: http://drf-pyotp.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+.. image:: https://badge.fury.io/py/drf-pyotp.svg
+    :target: https://badge.fury.io/py/drf-pyotp
+
+
 - This library uses `PyOTP`_ library for generating and verifying one-time passwords.Here OTP generation and Verification is done via DRF APIs.
 
 - The main focus is to open an API for OTP Generation & Verification.
@@ -34,6 +42,10 @@ APIs
 - I have used swagger-spec for documenting APIs. You can find out APIs swagger docs at::
 
    http://{your-base-path}/pyotp-swagger/
+
+Documentation
+-------------
+http://drf-pyotp.readthedocs.io/en/latest/
 
 Contribution
 ------------
