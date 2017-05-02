@@ -8,10 +8,17 @@ PyOTP extension for DRF (Django Rest Framework) !
 .. image:: https://badge.fury.io/py/drf-pyotp.svg
     :target: https://badge.fury.io/py/drf-pyotp
 
+.. image:: https://travis-ci.org/inforian/drf-pyotp.svg?branch=master
+    :target: https://travis-ci.org/inforian/drf-pyotp
+
+
 
 - This library uses `PyOTP`_ library for generating and verifying one-time passwords.Here OTP generation and Verification is done via DRF APIs.
 
 - The main focus is to open an API for OTP Generation & Verification.
+
+- Supports Python2.7+, Django 1.8+
+
 
 Installation
 ------------
