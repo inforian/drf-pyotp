@@ -12,7 +12,7 @@
 from __future__ import unicode_literals
 
 # 3rd party
-
+from rest_framework_swagger.views import get_swagger_view
 
 # Django
 from django.conf.urls import url
@@ -61,4 +61,8 @@ urlpatterns = [
     url(r'^verify-otp/(?P<otp_type>(hotp|totp))/(?P<uuid>{uuid})/$'.format(otp_type=OTP_TYPE_REGEX, uuid=UUID_REGEX),
         verify_otp,
         name='verify-otp'),
+    # swagger urls
+    url(r'^pyotp-swagger/$',
+        get_swagger_view(title='fg')),
+
 ]

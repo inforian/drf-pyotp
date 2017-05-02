@@ -17,18 +17,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
-
-from rest_framework_swagger.views import get_swagger_view
 
 
 API_TITLE = 'Rest PyOTP APIs'
 
 urlpatterns = [
-    url(r'^pyotp-swagger/$', get_swagger_view(title=API_TITLE)),
-
     url(r'^admin/', admin.site.urls),
 
     # pyotp routers
