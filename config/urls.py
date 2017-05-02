@@ -21,19 +21,18 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 
 
-API_TITLE = 'DRF-PyOTP APIs'
+API_TITLE = 'Rest PyOTP APIs'
 
 urlpatterns = [
     url(r'^pyotp-swagger/$', get_swagger_view(title=API_TITLE)),
 
-    # url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
 
     # pyotp routers
-    url(r'', include('app.routers', namespace='drf-pyotp')),
+    url(r'', include('rest_pyotp.routers', namespace='drf-pyotp')),
 
 ]
 
