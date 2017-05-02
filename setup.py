@@ -10,7 +10,7 @@ setup(
   author_email='ndhiman08@gmail.com',
   license='GPL',
   url='https://github.com/inforian/drf-pyotp',
-  download_url='https://github.com/inforian/drf-pyotp/archive/0.5.2.tar.gz',
+  download_url='https://github.com/inforian/drf-pyotp/archive/v0.5.2.tar.gz',
   keywords=['otp', 'pyotp', 'totp', 'hotp', 'drf-pyotp'],
   classifiers=[],
   install_requires=[
