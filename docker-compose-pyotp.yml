@@ -1,0 +1,25 @@
+version: "2"
+services:
+  pyotp_db:
+    image: postgres:9.6
+    ports:
+     - "5432:5432"
+    env_file:
+     - ../locale/env/pyotp_service
+    volumes:
+      - /home/veris/micro-services/pyotp/data/postgres:/var/lib/postgresql/data
+  v_pyotp:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+     - ../locale/env/pyotp_service
+    environment:
+     DEBUG: 'true'
+    command: bash -c "python ./manage.py migrate && python ./manage.py runserver 0.0.0.0:8017"
+    volumes:
+     - .:/v-pyotp
+    ports:
+     - "8017:8017"
+#    depends_on:
+#      - templates_db
