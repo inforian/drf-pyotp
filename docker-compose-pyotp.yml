@@ -3,7 +3,7 @@ services:
   pyotp_db:
     image: postgres:9.6
     ports:
-     - "5432:5432"
+     - "9007:5432"
     env_file:
      - ../locale/env/pyotp_service
     volumes:
@@ -21,5 +21,4 @@ services:
      - .:/v-pyotp
     ports:
      - "8017:8017"
-#    depends_on:
-#      - templates_db
+
