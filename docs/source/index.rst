@@ -40,7 +40,7 @@ Contribution
 
 Swagger Specs
 -------------
- https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
+ https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.1.0
 
 Indices and tables
 ==================
