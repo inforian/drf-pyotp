@@ -55,7 +55,7 @@ Documentation
 -------------
 - Docs : http://drf-pyotp.readthedocs.io/en/latest/
 
-- swagger specs : https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
+- swagger specs :  https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.1.0
 
 Contribution
 ------------
