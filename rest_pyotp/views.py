@@ -32,7 +32,19 @@ class PyotpViewset(viewsets.GenericViewSet):
     queryset = models.PyOTP.objects.all()
     lookup_field = 'uuid'
     otp_type = None
-    serializer_class = serializers.NoneSerializer  # Default serializer is None
+
+    def get_serializer_class(self):
+        if self.action == 'generate_hotp':
+            return serializers.HotpSerializer
+        elif self.action == 'generate_totp':
+            return serializers.TotpSerializer
+        elif self.action == 'generate_hotp_provision_uri':
+            return serializers.HOTPProvisionUriSerializer
+        elif self.action == 'generate_totp_provision_uri':
+            return serializers.TOTPProvisionUriSerializer
+        elif self.action == 'verify_otp':
+            return serializers.VerifyOtpSerilaizer
+        return serializers.NoneSerializer
 
     def generate_hotp(self, request):
         """
