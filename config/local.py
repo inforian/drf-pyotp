@@ -86,9 +86,6 @@ CELERY_ALWAYS_EAGER = True
 ########## PROJECT SPECIFIC CONFIGURATION
 
 
-##### Server URL ########
-SERVER_URL = get_env_setting('SERVER_URL')
-
 # ######### DJANGO REST FRAMEWORK CONFIGURATION
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
