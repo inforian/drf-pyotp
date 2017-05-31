@@ -84,6 +84,13 @@ class PyOTP(models.Model):
             max_length=255,
             help_text=_('Issuer Name for Provisioning URI.'),
     )
+    extra_unique_info = models.CharField(
+        _('Extra Unique Info'),
+        null=True,
+        blank=True,
+        max_length=255,
+        help_text=_('Extra uniqoue info regarding OTp (custom requirement for v3)'),
+    )
     created_at = models.DateTimeField(
                  _('created at'),
                  auto_now_add=True,

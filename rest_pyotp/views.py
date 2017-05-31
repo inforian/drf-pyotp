@@ -46,41 +46,48 @@ class PyotpViewset(viewsets.GenericViewSet):
             return serializers.VerifyOtpSerilaizer
         return serializers.NoneSerializer
 
+    def _validate(self, serializer, data):
+        """
+        :param serializer: serializer against which data to ve validated
+        :param data: data to ve validated
+        :return: serializer instance.
+        """
+
+        serializer_instance = serializer(data=data)
+        serializer_instance.is_valid(raise_exception=True)
+        return serializer_instance.save()
+
     def generate_hotp(self, request):
         """
         """
-        serializer = serializers.HotpSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        response = serializer.save()
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
 
-        return Response(response, status=status.HTTP_201_CREATED)
+        return Response(serializer, status=status.HTTP_201_CREATED)
 
     def generate_totp(self, request):
         """
         """
-        serializer = serializers.TotpSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        response = serializer.save()
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
 
-        return Response(response, status=status.HTTP_201_CREATED)
+        return Response(serializer, status=status.HTTP_201_CREATED)
 
     def generate_hotp_provision_uri(self, request):
         """
         """
-        serializer = serializers.HOTPProvisionUriSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        response = serializer.save()
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
 
-        return Response(response, status=status.HTTP_201_CREATED)
+        return Response(serializer, status=status.HTTP_201_CREATED)
 
     def generate_totp_provision_uri(self, request):
         """
         """
-        serializer = serializers.TOTPProvisionUriSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        response = serializer.save()
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
 
-        return Response(response, status=status.HTTP_201_CREATED)
+        return Response(serializer, status=status.HTTP_201_CREATED)
 
     def verify_otp(self, request, otp_type, uuid):
         """
@@ -91,8 +98,9 @@ class PyotpViewset(viewsets.GenericViewSet):
         :return: 200_ok OR 400_bad_request
         """
         obj = self.get_object()
+        serializer = self.get_serializer_class()
 
-        serializer = serializers.VerifyOtpSerilaizer(data=request.data)
+        serializer = serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         valid_otp = serializer.verify_otp(serializer.data.get('otp'), obj, otp_type)
@@ -101,5 +109,51 @@ class PyotpViewset(viewsets.GenericViewSet):
         return Response(status=status.HTTP_200_OK)
 
 
+class V3PyotpViewset(viewsets.GenericViewSet):
+    """Pyotp Viewset, for v3
 
+    """
+    # Fixme: This is wrong requirement or fix, we have to find out other way asap
+    queryset = models.PyOTP.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'generate_otp':
+            return serializers.V3OtpSerializer
+        elif self.action == 'verify_otp':
+            return serializers.V3VerifyOtpSerilaizer
+        return serializers.NoneSerializer
+
+    def _validate(self, serializer, data):
+        """
+        :param serializer: serializer against which data to ve validated
+        :param data: data to ve validated
+        :return: serializer instance.
+        """
+
+        serializer_instance = serializer(data=data)
+        serializer_instance.is_valid(raise_exception=True)
+        return serializer_instance
+
+    def generate_otp(self, request):
+        """
+        """
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
+        response = serializer.save()
+
+        return Response(response, status=status.HTTP_201_CREATED)
+
+    def verify(self, request, ):
+        """
+
+        :param request: Django request
+        :return: 200_ok OR 400_bad_request
+        """
+        serializer = self.get_serializer_class()
+        serializer = self._validate(serializer, request.data)
+
+        valid_otp = serializer.verify_otp(serializer.data.get('otp'), serializer.data.get('unique_identifier'))
+        if not valid_otp:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_200_OK)
 

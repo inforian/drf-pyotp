@@ -45,6 +45,17 @@ generate_totp_provision_uri = views.PyotpViewset.as_view({
     'post': 'generate_totp_provision_uri',
 })
 
+
+# custom API's for v3, here we will get unique identifier from clint and generate/verify otp w.r.t that
+
+generate_otp_v3 = views.V3PyotpViewset.as_view({
+    'post': 'generate_otp',
+})
+
+verify_otp_v3 = views.V3PyotpViewset.as_view({
+    'post': 'verify',
+})
+
 urlpatterns = [
     url(r'^generate-otp/hotp/$',
         generate_hotp,
@@ -60,5 +71,13 @@ urlpatterns = [
         name='generate-totp-provision-uri'),
     url(r'^verify-otp/(?P<otp_type>(hotp|totp))/(?P<uuid>{uuid})/$'.format(otp_type=OTP_TYPE_REGEX, uuid=UUID_REGEX),
         verify_otp,
-        name='verify-otp'),
+        name='verify-otp-v3'),
+
+
+    url(r'^generate-otp/$',
+        generate_otp_v3,
+        name='generate-otp'),
+    url(r'^verify-otp/$',
+        verify_otp_v3,
+        name='s-otp-v3'),
 ]

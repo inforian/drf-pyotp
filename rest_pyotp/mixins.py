@@ -47,7 +47,8 @@ class OTPMixin(object):
             'otp': otp,
             'secret': secret,
             'count': count,
-            'interval': interval
+            'interval': interval,
+            'extra_unique_info': data.get('extra_unique_info')
         }
 
         # is provision settings is True only then save data into db

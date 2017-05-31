@@ -22,7 +22,7 @@ from rest_framework import serializers
 # local
 
 # own app
-from rest_pyotp import mixins
+from rest_pyotp import mixins, models
 
 
 class NoneSerializer(serializers.Serializer):
@@ -116,6 +116,34 @@ class VerifyOtpSerilaizer(serializers.Serializer):
             hotp = pyotp.HOTP(obj.secret)
             return hotp.verify(otp, obj.count)
         elif otp_type == 'totp' and obj.interval:
+            totp = pyotp.TOTP(obj.secret, interval=obj.interval)
+            return totp.verify(otp)
+        return False
+
+
+class V3OtpSerializer(TotpSerializer):
+    """v3 OTP serializer
+
+    """
+    unique_identifier = serializers.CharField(required=True, source='extra_unique_info')
+    time = serializers.IntegerField(required=True, help_text="OTP Validity-Time (in seconds).")
+
+
+class V3VerifyOtpSerilaizer(VerifyOtpSerilaizer):
+    """Serializer used to verify OTP (V3)
+
+    """
+    unique_identifier = serializers.CharField(required=True)
+    otp = serializers.CharField(required=True)
+
+    def verify_otp(self, otp, unique_identifier):
+        """
+        :param otp: otp entered by user
+        :param unique_identifier: unique identifier w.r.t OTP
+        :return: Boolean
+        """
+        if models.PyOTP.objects.filter(otp=otp, extra_unique_info=unique_identifier):
+            obj = models.PyOTP.objects.filter(otp=otp, extra_unique_info=unique_identifier).first()
             totp = pyotp.TOTP(obj.secret, interval=obj.interval)
             return totp.verify(otp)
         return False
