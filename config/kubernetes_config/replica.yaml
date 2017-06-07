@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: pyotp-service
+  labels:
+    name: pyotp-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: pyotp-service
+    spec:
+      containers:
+      - name: pyotp-service
+        image: inforian/pyotp-service:
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: secrets
+          mountPath: /etc/secrets
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+
