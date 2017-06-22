@@ -23,6 +23,10 @@ shell:
 superuser:
 	python manage.py createsuperuser
 
+.PHONY: test
+test:
+	python manage.py test
+
 # ---------------------------------------------------------------------------------------------------
 
 # Makefile commands for docker
