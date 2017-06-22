@@ -65,13 +65,13 @@ urlpatterns = [
         name='generate-totp'),
     url(r'^generate-otp/hotp/provision-uri/$',
         generate_hotp_provision_uri,
-        name='generate-totp-provision-uri'),
+        name='generate-hotp-provision-uri'),
     url(r'^generate-otp/totp/provision-uri/$',
         generate_totp_provision_uri,
         name='generate-totp-provision-uri'),
     url(r'^verify-otp/(?P<otp_type>(hotp|totp))/(?P<uuid>{uuid})/$'.format(otp_type=OTP_TYPE_REGEX, uuid=UUID_REGEX),
         verify_otp,
-        name='verify-otp-v3'),
+        name='verify-otp-w-uuid'),
 
 
     url(r'^generate-otp/$',
@@ -79,5 +79,5 @@ urlpatterns = [
         name='generate-otp'),
     url(r'^verify-otp/$',
         verify_otp_v3,
-        name='s-otp-v3'),
+        name='verify-otp-w-unique-identifier-v3'),
 ]
