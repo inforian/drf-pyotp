@@ -46,6 +46,8 @@ class PyotpViewset(viewsets.GenericViewSet):
             return serializers.VerifyOtpSerilaizer
         return serializers.NoneSerializer
 
+
+
     def _validate(self, serializer, data):
         """
         :param serializer: serializer against which data to ve validated
@@ -119,7 +121,7 @@ class V3PyotpViewset(viewsets.GenericViewSet):
     def get_serializer_class(self):
         if self.action == 'generate_otp':
             return serializers.V3OtpSerializer
-        elif self.action == 'verify_otp':
+        elif self.action == 'verify':
             return serializers.V3VerifyOtpSerilaizer
         return serializers.NoneSerializer
 
