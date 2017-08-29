@@ -61,10 +61,5 @@ Contribution
 ------------
 - If anyone wish to contribute in improving this library then he is most welcome, due credit will be given to every individual.
 
-
-.. image:: https://app.codesponsor.io/embed/NJ36ZJN5UcFRWGekS9Mu6fcD/inforian/drf-pyotp.svg
-    :target: https://app.codesponsor.io/link/NJ36ZJN5UcFRWGekS9Mu6fcD/inforian/drf-pyotp
-    :alt: Code Sponser link
-
 .. _PyOTP: https://github.com/pyotp/pyotp
 .. _here: https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
