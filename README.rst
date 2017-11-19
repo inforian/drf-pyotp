@@ -61,6 +61,5 @@ Contribution
 ------------
 - If anyone wish to contribute in improving this library then he is most welcome, due credit will be given to every individual.
 
-
 .. _PyOTP: https://github.com/pyotp/pyotp
 .. _here: https://app.swaggerhub.com/apis/inforian/PyOTP-REST-APIs/1.0.0
