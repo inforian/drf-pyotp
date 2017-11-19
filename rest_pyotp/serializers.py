@@ -80,8 +80,9 @@ class TOTPProvisionUriSerializer(TotpSerializer, ProvisionUriSerializer):
         :param validated_data: valid data
         :return: pyotp object
         """
-        count = validated_data.pop('time')
-        return self._generate_hotp(count, provision_uri=True, data=validated_data)
+        interval = validated_data.pop('time')
+        return self._generate_totp(
+            interval, provision_uri=True, data=validated_data)
 
 
 class HOTPProvisionUriSerializer(HotpSerializer, ProvisionUriSerializer):
