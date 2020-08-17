@@ -159,7 +159,8 @@ ALLOWED_HOSTS = []
 # ######### SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key should only be used for development and testing.
-SECRET_KEY = get_env_setting('SECRET_KEY')
+# SECRET_KEY = get_env_setting('SECRET_KEY')
+SECRET_KEY = '6-+098trtI09/5365Mecq1'
 # ######### END SECRET CONFIGURATION
 
 # ######### FIXTURE CONFIGURATION

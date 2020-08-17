@@ -22,6 +22,7 @@ from django.conf.urls import url
 # own app
 from rest_pyotp import views
 
+
 UUID_REGEX = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 OTP_TYPE_REGEX = '(hotp|totp)'
 
