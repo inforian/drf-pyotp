@@ -70,8 +70,6 @@ class PyotpViewset(viewsets.GenericViewSet):
         """
         serializer = self.get_serializer_class()
         serializer = self._validate(serializer, request.data)
-        print('serializer: ',serializer)
-        print('request data: ',request.data)
         return Response(serializer, status=status.HTTP_201_CREATED)
 
     def generate_hotp_provision_uri(self, request):
@@ -99,7 +97,6 @@ class PyotpViewset(viewsets.GenericViewSet):
         :return: 200_ok OR 400_bad_request
         """
         obj = self.get_object()
-        print('obj: ',obj)
         serializer = self.get_serializer_class()
 
         serializer = serializer(data=request.data)
