@@ -16,8 +16,11 @@ import uuid
 
 # Django
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
+try:
+    from django.utils.translation import ugettext_lazy as _
+except:
+    from django.utils.translation import gettext_lazy as _  # Django 4 version support
 # local
 
 
