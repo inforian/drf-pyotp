@@ -4,7 +4,7 @@ from setuptools import find_packages
 setup(
   name='drf-pyotp',
   packages=find_packages(exclude=['example']),
-  version='0.5.7',
+  version='0.6.0',
   description='Rest extension of PyOTP python library, Here OTP generation and Verification is done via DRF APIs.',
   author='Neeraj Dhiman',
   author_email='ndhiman08@gmail.com',
@@ -14,8 +14,8 @@ setup(
   keywords=['otp', 'pyotp', 'totp', 'hotp', 'drf-pyotp'],
   classifiers=[],
   install_requires=[
-    'Django>=1.9',
-    'djangorestframework>=3.0',
+    'Django>=2.2.28',
+    'djangorestframework>=3.11.2',
     'pyotp>=2.2.4',
   ]
 )
